@@ -5,7 +5,8 @@
     function AuthGuard(): void
     {
         let protected_routes: string[] = [
-            "contact-list"
+            "contact-list",
+            "task-list"
         ];
     
     
@@ -393,8 +394,12 @@
             // swap out the login link for logout
             $("#login").html(
                 `<a id="logout" class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`
-            );
-            
+                );
+                //not sure why this doesnt work.
+           // $("#task-list").html(`<a class="nav-link" data="task-list"><i class="fa-light fa-list-tree"></i> Task-List</a>`);
+        
+            $("#task-list").show();
+        
             $("#logout").on("click", function()
             {
                 // perform logout
@@ -404,6 +409,9 @@
                 $("#login").html(
                     `<a class="nav-link" data="login"><i class="fas fa-sign-in-alt"></i> Login</a>`
                 );
+                $("#task-list").hide(); // remove the attribute from view on the header.
+
+             
 
                 AddNavigationEvents();
 
@@ -600,6 +608,7 @@
             case "edit": return DisplayEditPage;
             case "login": return DisplayLoginPage;
             case "register": return DisplayRegisterPage;
+            case "task-list": return DisplayTaskList;
             case "404": return Display404Page;
             default:
                 console.error("ERROR: callback does not exist: " + router.ActiveLink);
